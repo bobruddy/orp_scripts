@@ -371,6 +371,12 @@ function install_webserver {
 		   location ~^.+.(db)$ {
 		      deny all;
 		   }
+
+		   # shellinabox -> w3rcr, Ultimatly I don't think we need this, but it will support testing
+		   location /shell/ {
+			proxy_pass https://localhost:7431;
+		   }
+
 		}
 	DELIM
 
@@ -557,6 +563,6 @@ function update_shellinabox {
 
 	CONFIG='/tmp/shellinabox'
 
-	sed -i ${CONFIG} -e 's/--no-beep/--no-beep --localhost-only/'
+	sed -i ${CONFIG} -e 's/--no-beep/--no-beep -m https://127.0.0.1 --localhost-only/'
 	sed -i ${CONFIG} -e 's/4200/7431/'
 }
