@@ -105,6 +105,7 @@ fi
 		install_orp_modules
 		update_versioning
 		modify_sudoers
+		update_shellinabox
 	
 		### ENDING FUNCTIONS ###
 		rpi_disables

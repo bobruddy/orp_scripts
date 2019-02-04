@@ -403,7 +403,7 @@ function install_orp_dependancies {
 		libgcrypt20 libgsm1 libopus0 libpopt0 libsigc++-2.0-0v5 libsox-fmt-mp3 libxml2 libxml2-dev \
 		libxslt1-dev logrotate ntp python3-configobj python-cheetah python3-dev python-imaging \
 		python3-pip python3-usb python3-serial python3-serial resolvconf screen sox sqlite3 \
-		sudo tcl8.6 time tk8.6 usbutils uuid vim vorbis-tools watchdog wvdial
+		sudo tcl8.6 time tk8.6 usbutils uuid vim vorbis-tools watchdog wvdial shellinabox
 
 	# w3rcr -> network-manager package was removed as it caused instability 
 	# particularly with wifi networks. This is a packaged geared towards laptop
@@ -546,4 +546,17 @@ function update_versioning {
 
 	# Update version in database
 	sqlite3 "/var/lib/openrepeater/db/openrepeater.db" "UPDATE version_info SET version_num='$ORP_VERSION'"
+}
+
+################################################################################
+
+function update_shellinabox {
+	echo "--------------------------------------------------------------"
+	echo " Setting up shellinabox ajax ssh interface"
+	echo "--------------------------------------------------------------"
+
+	CONFIG='/tmp/shellinabox'
+
+	sed -i ${CONFIG} -e 's/--no-beep/--no-beep --localhost-only/'
+	sed -i ${CONFIG} -e 's/4200/7431/'
 }
